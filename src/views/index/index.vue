@@ -47,6 +47,9 @@
           <div @click="clickJoin">
             <a-button class="w-[178px] h-[37px] text-[#fff] mt-[40px] btn-box">Join $ABSC</a-button>
           </div>
+          <div @click="toFaucet">
+            <a-button class="w-[178px] h-[37px] text-[#fff] mt-[40px] btn-box">Join Faucet</a-button>
+          </div>
           <vue-recaptcha
               :sitekey="v2Sitekey"
               size="normal"
@@ -86,10 +89,12 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import vueRecaptcha from 'vue3-recaptcha2';
 // import { CloseOutlined } from "@ant-design/icons-vue"
 const open = ref(false);
 const isMobile = ref(false)
+const router = useRouter()
 
 // const onClose = () => {
 //   open.value = false
@@ -107,6 +112,9 @@ const recaptchaExpired = () => {
 
 const recaptchaFailed = () => {
   // 失敗執行動作
+}
+const toFaucet = () => {
+  router.push("/faucet")
 }
 const clickJoin = () => {
   window.open('https://absc.app/')
