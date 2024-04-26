@@ -47,6 +47,16 @@
           <div @click="clickJoin">
             <a-button class="w-[178px] h-[37px] text-[#fff] mt-[40px] btn-box">Join $ABSC</a-button>
           </div>
+          <vue-recaptcha
+              :sitekey="v2Sitekey"
+              size="normal"
+              theme="light"
+              hl="zh-TW"
+              @verify="recaptchaVerified"
+              @expire="recaptchaExpired"
+              @fail="recaptchaFailed"
+          >
+          </vue-recaptcha>
           <!-- <div class="mobile-min-btn text-[#ffffff]" v-if="isMobile">
             <div class=" min-btn">
               Mint (Coming Soon)
@@ -76,6 +86,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import vueRecaptcha from 'vue3-recaptcha2';
 // import { CloseOutlined } from "@ant-design/icons-vue"
 const open = ref(false);
 const isMobile = ref(false)
@@ -85,7 +96,18 @@ const isMobile = ref(false)
 // }
 
 // const contentWrapperStyle = ref({ 'backfround-color': '#1F1F1F' })
+const v2Sitekey = '6LcWvccpAAAAAHcR20JmIy_Zq9NKiYba72YWqQ75';
+const recaptchaVerified = (res) => {
+  console.log(res)
+}
 
+const recaptchaExpired = () => {
+  // 過期後執行動作
+}
+
+const recaptchaFailed = () => {
+  // 失敗執行動作
+}
 const clickJoin = () => {
   window.open('https://absc.app/')
 }
